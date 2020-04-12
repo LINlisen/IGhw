@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, Image,ScrollView, Button, Linking,TouchableOpacity} from "react-native";
+import { Directions } from "react-native-gesture-handler";
 
-const albumDetail = ({ album ,navigation }) =>{
+const Detail = ({ page ,navigation }) =>{
    
     return(
         <ScrollView>
@@ -9,20 +10,36 @@ const albumDetail = ({ album ,navigation }) =>{
                 
                 <View style={styles.box}>
                     
-                    <View>
-                        <Text style={styles.content}>{album.title}</Text>
+                    <View style={ {flexDirection:'row'}}>
+                        <Image style={styles.smallpic}
+                                source={{uri:page.smallimg}}/>
+                        <Text style={styles.artist}>{page.artist}</Text>
+                        
+                      
                     </View>
-                    <View>
-                        <TouchableOpacity
-                            onPress={()=> navigation.navigate('Detail',album)}>
-                            <Image 
+                    <View style={{zIndex:2,width:420,height:3}}>
+                    <Image 
                                 style={styles.img}
-                                source={{uri:album.image}}/>
-                        </TouchableOpacity>
-                    </View>
+                                source={{uri:page.image}}/> 
+                         </View>
+                         <View style={{flexDirection:'row',zIndex:1}}>
+                                <Image style={styles.icon}
+                                source={{uri:page.favorite}}/>
+                                <Image style={styles.icon}
+                                source={{uri:page.share}}/>
+                                <Image style={styles.icon}
+                                source={{uri:page.save}}/>
+                        </View>
+                        <View>
+    <Text style={styles.like}>{page.like}</Text>
+    <Text style={styles.content}>{page.content}</Text>
+    <Text style={styles.like}>{page.message}</Text>
+    <Text style={styles.leave}>{page.leave}</Text>
+    <Text style={styles.time}>{page.time}</Text>
+                        </View>
                     
                 </View>
-                
+               
                 
             </View>
         </ScrollView>
@@ -30,45 +47,73 @@ const albumDetail = ({ album ,navigation }) =>{
 };
 const styles = StyleSheet.create({
     back:{
-        height:400,
-        backgroundColor:'#BEBEBE',
+        
+        height:700,
+        backgroundColor:'white',
         zIndex:5
     },
+    box:{
+        
+    },
+
+    smallpic:{
+        height:40,
+        width:40,
+        marginTop:40,
+        marginLeft:2
+
+    },
     artist:{
-        fontSize:20,
+        fontSize:12,
         justifyContent:"center",
         alignItems: 'center',
+        marginTop:55,
+        marginLeft:10
+    },
+    
+    img:{
+        width:420,
+        height:420,
+       
+        marginTop:23,
+        marginLeft:0
+        
+    },
+    icon:{
+        width:28,
+        height:28,
+        marginTop:455,
+        marginLeft:15,
+        
+    },
+    like:{
+        marginLeft:15,
         marginTop:10
     },
-    smallimg:{
-        width:100,
-        height:100,
-        marginTop:20,
-        marginLeft:160
-    },
-    box:{
-        width:300,
-        height:300,
-        marginTop:20,
-        marginLeft:60,
-        backgroundColor:"#F0F0F0",
-        
-    },
-    img:{
-        width:200,
-        height:200,
-       zIndex:-2,
-        marginTop:30,
-        marginLeft:50
-        
-    },
     content:{
-        color:'#2F0000',
-        fontSize:20,
-        marginLeft:10,
-        marginTop:10,
-       
-        },
+        marginLeft:15,
+        marginTop:5,
+        fontSize:18,
+        fontWeight:'400'
+    },
+    leave:{
+        marginLeft:15,
+        marginTop:5,
+        color:'gray',
+        borderWidth:1,
+        borderColor:'gray',
+        opacity:0.5,
+        width:380,
+        height:22
+    },
+    time:{
+        marginLeft:15,
+        marginTop:5,
+        color:'gray',
+        fontSize:12
+    }
+    
+    
         
 });
-export default albumDetail;
+export default Detail;
